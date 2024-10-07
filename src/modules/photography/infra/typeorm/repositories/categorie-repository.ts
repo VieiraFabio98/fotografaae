@@ -84,7 +84,7 @@ class CategorieRepository implements ICategorieRepository {
         .limit(rowsPerPage)
         .take(rowsPerPage)
         .getRawMany()
-      console.log(categories)
+      
       return ok(categories)
     } catch (err) {
       return serverError(err)
@@ -106,7 +106,7 @@ class CategorieRepository implements ICategorieRepository {
         query.addOrderBy('cat.name')
 
       const categories = await query.getRawMany()
-      console.log(categories)
+      
       return ok(categories)
 
     } catch (err) {
