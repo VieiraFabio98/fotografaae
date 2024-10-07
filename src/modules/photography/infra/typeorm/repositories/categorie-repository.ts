@@ -84,7 +84,7 @@ class CategorieRepository implements ICategorieRepository {
         .limit(rowsPerPage)
         .take(rowsPerPage)
         .getRawMany()
-
+      console.log(categories)
       return ok(categories)
     } catch (err) {
       return serverError(err)
@@ -93,18 +93,22 @@ class CategorieRepository implements ICategorieRepository {
 
 
   // select
-  async select (filter: string): Promise<HttpResponse> {
+  async select (filter?: string): Promise<HttpResponse> {
     try {
-      const categories = await this.repository.createQueryBuilder('cat')
+      let query = await this.repository.createQueryBuilder('cat')
         .select([
           'cat.id as "value"',
-          'cat.nome as "label"',
+          'cat.name as "label"',
         ])
-        .where('cat.nome ilike :filter', { filter: `${filter}%` })
-        .addOrderBy('cat.nome')
-        .getRawMany()
+        if(filter) {
+          query.where('cat.name ilike :filter', { filter: `${filter}%` })
+        }
+        query.addOrderBy('cat.name')
 
+      const categories = await query.getRawMany()
+      console.log(categories)
       return ok(categories)
+
     } catch (err) {
       return serverError(err)
     }
@@ -117,7 +121,7 @@ class CategorieRepository implements ICategorieRepository {
       const categorie = await this.repository.createQueryBuilder('cat')
         .select([
           'cat.id as "value"',
-          'cat.nome as "label"',
+          'cat.name as "label"',
         ])
         .where('cat.id = :id', { id: `${id}` })
         .getRawOne()

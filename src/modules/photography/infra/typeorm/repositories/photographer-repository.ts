@@ -16,22 +16,22 @@ class PhotographerRepository implements IPhotographerRepository {
   // create
   async create ({
     name,
+    lastName,
     cpf,
     email,
     telephone,
     photos,
     subscriptionId,
-    year,
     status
   }: IPhotographerDTO): Promise<HttpResponse> {
     const photographer = this.repository.create({
       name,
+      lastName,
       cpf,
       email,
       telephone,
       photos,
       subscriptionId,
-      year,
       status
     })
 
@@ -176,6 +176,7 @@ class PhotographerRepository implements IPhotographerRepository {
         .select([
           'pho.id as "id"',
           'pho.name as "name"',
+          'pho.lastName as "lastName"',
           'pho.cpf as "cpf"',
           'pho.email as "email"',
           'pho.telephone as "telephone"',
@@ -204,12 +205,12 @@ class PhotographerRepository implements IPhotographerRepository {
   async update ({
     id,
     name,
+    lastName,
     cpf,
     email,
     telephone,
     photos,
     subscriptionId,
-    year,
     status
   }: IPhotographerDTO): Promise<HttpResponse> {
     const photographer = await this.repository.findOne(id)
@@ -221,12 +222,12 @@ class PhotographerRepository implements IPhotographerRepository {
     const newphotographer = this.repository.create({
       id,
       name,
+      lastName,
       cpf,
       email,
       telephone,
       photos,
       subscriptionId,
-      year,
       status
     })
 

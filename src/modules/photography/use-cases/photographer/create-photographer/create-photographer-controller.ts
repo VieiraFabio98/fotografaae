@@ -7,10 +7,12 @@ class CreatePhotographerController {
   async handle(request: Request, response: Response): Promise<Response> {
     const {
       name,
+      lastName,
       cpf,
       email,
       telephone,
       photos,
+      description,
       subscriptionId,
       year,
       status
@@ -20,10 +22,12 @@ class CreatePhotographerController {
 
     const result = await createPhotographerUseCase.execute({
         name,
+        lastName,
         cpf,
         email,
         telephone,
         photos,
+        description,
         subscriptionId,
         year,
         status

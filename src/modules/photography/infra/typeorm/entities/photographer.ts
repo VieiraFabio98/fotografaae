@@ -11,6 +11,9 @@ class Photographer {
   @Column({ name: 'name', nullable: true })
   name?: string
 
+  @Column({ name: 'last_name', nullable: true })
+  lastName?: string
+
   @Column({ name: 'cpf', nullable: true })
   cpf?: string
 
@@ -22,6 +25,9 @@ class Photographer {
 
   @Column({ name: 'photos', nullable: true })
   photos?: string
+
+  @Column({ name: 'description', nullable: true })
+  description?: string
 
   @Column({ name: 'subscription_id', nullable: true })
   subscriptionId?: string

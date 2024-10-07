@@ -17,6 +17,11 @@ export class CreatePhotographer1724969211005 implements MigrationInterface {
             isNullable: false,
           },
           {
+            name: 'last_name',
+            type: 'varchar',
+            isNullable: false,
+          },
+          {
             name: 'cpf',
             type: 'varchar',
             isNullable: false,
@@ -34,16 +39,16 @@ export class CreatePhotographer1724969211005 implements MigrationInterface {
           {
             name: 'photos',
             type: 'varchar',
-            isNullable: false,
+            isNullable: true,
+          },
+          {
+            name: 'description',
+            type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'subscription_id',
             type: 'uuid',
-            isNullable: false,
-          },
-          {
-            name: 'year',
-            type: 'timestamp',
             isNullable: true,
           },
           {

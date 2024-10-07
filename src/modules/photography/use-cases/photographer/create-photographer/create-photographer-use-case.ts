@@ -5,10 +5,12 @@ import { AppError } from '@shared/errors/app-error'
 
 interface IRequest {
   name: string
+  lastName: string
   cpf: string
   email: string
   telephone: string
   photos: string
+  description: string
   subscriptionId: string
   year: Date
   status: boolean
@@ -22,22 +24,24 @@ class CreatePhotographerUseCase {
 
   async execute({
     name,
+    lastName,
     cpf,
     email,
     telephone,
     photos,
+    description,
     subscriptionId,
-    year,
     status
   }: IRequest): Promise<Photographer> {
     const result = await this.photographerRepository.create({
         name,
+        lastName,
         cpf,
         email,
         telephone,
         photos,
+        description,
         subscriptionId,
-        year,
         status
       })
       .then(photographerResult => {
