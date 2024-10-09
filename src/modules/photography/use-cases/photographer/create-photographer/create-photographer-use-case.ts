@@ -2,6 +2,7 @@ import { inject, injectable } from 'tsyringe'
 import { Photographer } from '@modules/photography/infra/typeorm/entities/photographer'
 import { IPhotographerRepository } from '@modules/photography/repositories/i-photographer-repository'
 import { AppError } from '@shared/errors/app-error'
+import { IPhotographerCategorieRepository } from '@modules/photography/repositories/i-photographer-categorie-repository'
 
 interface IRequest {
   name: string
@@ -12,14 +13,17 @@ interface IRequest {
   photos: string
   description: string
   subscriptionId: string
-  year: Date
   status: boolean
+  categories: string[]
 }
 
 @injectable()
 class CreatePhotographerUseCase {
-  constructor(@inject('PhotographerRepository')
-    private photographerRepository: IPhotographerRepository
+  constructor(
+    @inject('PhotographerRepository')
+    private photographerRepository: IPhotographerRepository,
+    @inject('PhotographerCategorieRepository')
+    private photographerCategorieRepository: IPhotographerCategorieRepository,
   ) {}
 
   async execute({
@@ -31,7 +35,8 @@ class CreatePhotographerUseCase {
     photos,
     description,
     subscriptionId,
-    status
+    status,
+    categories
   }: IRequest): Promise<Photographer> {
     const result = await this.photographerRepository.create({
         name,
@@ -50,6 +55,13 @@ class CreatePhotographerUseCase {
       .catch(error => {
         return error
       })
+
+    categories.forEach(async category => {
+      await this.photographerCategorieRepository.create({
+        photographerId: result.data.id,
+        categorieId: category
+      })
+    })
 
     return result
   }

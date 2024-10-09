@@ -32,9 +32,6 @@ class Photographer {
   @Column({ name: 'subscription_id', nullable: true })
   subscriptionId?: string
 
-  @Column({ name: 'year', nullable: true, type: 'timestamptz' })
-  year?: Date
-
   @Column({ name: 'status', nullable: true, default: false })
   status?: boolean
 

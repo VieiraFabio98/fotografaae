@@ -22,7 +22,7 @@ const updatePhotographerController = new UpdatePhotographerController()
 const deletePhotographerController = new DeletePhotographerController()
 const multiDeletePhotographerController = new MultiDeletePhotographerController()
 
-photographersRoutes.post('/', ensureAuthenticated, createPhotographerController.handle)
+photographersRoutes.post('/', createPhotographerController.handle)
 photographersRoutes.post('/list', ensureAuthenticated, listPhotographerController.handle)
 photographersRoutes.post('/count', ensureAuthenticated, countPhotographerController.handle)
 photographersRoutes.get('/select/:id', ensureAuthenticated, idSelectPhotographerController.handle)

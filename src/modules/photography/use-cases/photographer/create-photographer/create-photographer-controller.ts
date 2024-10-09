@@ -14,8 +14,8 @@ class CreatePhotographerController {
       photos,
       description,
       subscriptionId,
-      year,
-      status
+      status,
+      categories
     } = request.body
 
     const createPhotographerUseCase = container.resolve(CreatePhotographerUseCase)
@@ -29,8 +29,8 @@ class CreatePhotographerController {
         photos,
         description,
         subscriptionId,
-        year,
-        status
+        status,
+        categories
       })
       .then(photographerResult => {
         return photographerResult
